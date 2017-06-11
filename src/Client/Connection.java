@@ -50,7 +50,7 @@ public class Connection {
         } catch (Exception e) {
             System.out.println("Blad rejestracji " + e);
         }
-        return ""; //todo
+        return "";
     }
 
     public String login(String login, String password) {

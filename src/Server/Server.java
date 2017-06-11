@@ -53,7 +53,7 @@ public class Server {
 
                                 out.println(userNotesOutput);
                             } catch (Exception error) {
-                                System.out.println("ERROR SERVER READ DATA" + error); //todo change
+                                System.out.println("ERROR SERVER READ DATA" + error);
                             }
                             break;
                         case "SetNotes":
@@ -109,7 +109,7 @@ public class Server {
                                     System.out.println(mainJsonObject);
 
                                 } catch (Exception e) {
-                                    //todo set
+                                    System.out.println("Error");
                                 }
                             }
                             break;

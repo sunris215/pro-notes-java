@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import static javax.swing.GroupLayout.Alignment.CENTER;
 
-class UserInterface extends JFrame{
+class UserInterface extends JFrame implements  KeyListener{
     private DefaultListModel model;
     private JScrollPane scrollpane;
     private JList list;
@@ -21,17 +21,13 @@ class UserInterface extends JFrame{
     private JButton savebtn;
     private Connection connection;
     private String userName, userSurname, login, password;
-    private Keyboardlistener keyboardlistener;
 
     JTextArea lista = new JTextArea();
 
 
 
     public UserInterface() {
-        keyboardlistener = new Keyboardlistener();
-//        login = "mario";
-        connection = new Connection();//todo uncoment
-//        init();
+        connection = new Connection();
         login("", "");
 
 
@@ -116,7 +112,7 @@ class UserInterface extends JFrame{
             mainJsonObject.put("data", jsonArray);
             connection.setData(jsonArray.toString(), login);
         } catch (Exception e) {
-            //todo set
+            System.out.println("Error");
         }
     }
 
@@ -254,7 +250,7 @@ class UserInterface extends JFrame{
                                 login("Rejestracja", messageFromServer);
                             }
                         } catch (Exception e) {
-                            //todo set
+                            System.out.println("Blad rejestracji");
                         }
                         return;
                     }
@@ -262,7 +258,6 @@ class UserInterface extends JFrame{
                     login("Rejestracja", "Uzupelnij wszystkie pola");
                     return;
                 }
-//                break;
             default:
                 String[] options = new String[]{"OK", "Cancel"};
 
@@ -293,7 +288,6 @@ class UserInterface extends JFrame{
                                 null, options, options[0]);
                         if (option == 0) {
                             char[] password = pass.getPassword();
-                            System.out.println("haslo co uzytkownik wpisa " + password);
 
                             String outputLogin = connection.login(login, String.valueOf(password));
                             try {
@@ -367,6 +361,25 @@ class UserInterface extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Klawisz zostal wcisniety ");
+        switch (e.getKeyCode())
+        {
+            case KeyEvent.VK_F4:
+                setData();
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }
 
 
@@ -374,6 +387,7 @@ public class ListModels {
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
         ui.setVisible(true);
+        ui.addKeyListener(ui);
 
     }
 }
